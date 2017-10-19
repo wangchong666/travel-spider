@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM aciobanu/scrapy
 
 MAINTAINER Wang Chong <w420050757@gmail.com>
 
