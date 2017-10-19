@@ -10,5 +10,11 @@ import scrapy
 
 class TravelSpiderItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    name = Field()
+    title = Field()
+    position = Field()
+    date = Field()
+    link = Field()
+    category = Field()
+    content = Field()
     pass
