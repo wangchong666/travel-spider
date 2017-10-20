@@ -14,7 +14,8 @@ RUN apk -U add \
     && update-ca-certificates \
     && rm -rf /var/cache/apk/* \
     && pip install --upgrade pip \
-    && pip install Scrapy
+    && pip install Scrapy \
+    && pip install pymongo
 
 WORKDIR /runtime/app
 
