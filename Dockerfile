@@ -22,5 +22,5 @@ WORKDIR /runtime/app
 COPY entrypoint.sh /runtime/entrypoint.sh
 RUN chmod +x /runtime/entrypoint.sh
 
-ENTRYPOINT ["/runtime/entrypoint.sh"]
+# ENTRYPOINT ["/runtime/entrypoint.sh"]
 CMD ["scrapy"]
