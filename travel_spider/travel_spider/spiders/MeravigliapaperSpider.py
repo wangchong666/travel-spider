@@ -42,6 +42,7 @@ class MeravigliapaperSpider(CrawlSpider):
         pages = int(pop.split(" ")[2]);
         urls = [scrapy.FormRequest(url=f.format(i),callback=self.parse_details) for i in range(1,pages+1)]
         print(urls)
+        return urls;
         pass
     # def parse(self, response):
     #     print(response.url);
