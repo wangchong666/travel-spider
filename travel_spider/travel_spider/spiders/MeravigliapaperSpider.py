@@ -56,7 +56,8 @@ class MeravigliapaperSpider(CrawlSpider):
         #     return  scrapy.FormRequest(url = newurl, meta = response.meta, callback=self.parse_item) 
         
         item = TravelSpiderItem()
-
+        item['title']="";
+        item['location']="";
         content = response.xpath('//div[@id="post"]/div/article').extract()[0];
         try:
 
