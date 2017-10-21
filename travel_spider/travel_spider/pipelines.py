@@ -16,6 +16,7 @@ class TravelSpiderPipeline(object):
 
 
     def process_item(self, item, spider):
+<<<<<<< HEAD
         print(item["name"])
         post = {"name": item["name"],
          "site": item["site"],
@@ -28,4 +29,6 @@ class TravelSpiderPipeline(object):
              "content":item["content"],
          }}
         self.posts.insert_one(post)
+=======
+>>>>>>> 755bcf2f066b64f4c17eb26e4e42b80a21aa12ff
         return item
