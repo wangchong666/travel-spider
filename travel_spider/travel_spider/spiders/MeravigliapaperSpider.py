@@ -5,9 +5,11 @@ from scrapy.link import Link
 from scrapy.spiders import CrawlSpider, Rule
 from travel_spider.items import TravelSpiderItem
 from scrapy.utils.project import get_project_settings
-#from spider.coding_patch import encode_content
 import json
-#import urllib.parse
+from pymongo import MongoClient
+
+
+
 
 class MeravigliapaperSpider(CrawlSpider):
     name = "meravigliapaper"
@@ -20,22 +22,18 @@ class MeravigliapaperSpider(CrawlSpider):
 
     def load_pids(self):
         if not hasattr(self,'pids'):
-            # settings = get_project_settings()
-            # data_table ='select pid from ' + settings.get('DATA_TABLE');
-            # test= MySQLdb.connect(user='root', passwd='*', db='*', host='localhost', charset="utf8", use_unicode=True)
-            # cur = test.cursor()
-            # print(data_table)
-            # cur.execute(data_table)
-            self.pids = set()
-            # for data in cur.fetchall():
-            #     self.pids.add(data[0])
+            client = MongoClient('mongodb://mongo:27017/')
+            all = client.travel.posts.find({}, {"address":1,"_id":0});
+            self.urls = set()
+            for data in all:
+                self.urls.add(data["address"])
              
     def parse_details(self, response):
         self.load_pids()
         urls = response.xpath("//div[@id='wpex-grid-wrap']/article/a/@href").extract()
         for url in urls:
-            if url not in self.pids:
-                self.pids.add(url)
+            if url not in self.urls:
+                self.urls.add(url)
                 yield scrapy.Request(url=url,callback=self.parse_item)
 
     def parse_total(self, response):
@@ -71,6 +69,7 @@ class MeravigliapaperSpider(CrawlSpider):
             item['address'] = response.url
             item['name'] = re.search(r'meravigliapaper.com/.+?/.+?/(.*?)/',response.url).group(1)
             item['content'] = content
+            item['site'] = "meravigliapaper"
 
         except Exception as e:
             self.logger.error(response.url)
