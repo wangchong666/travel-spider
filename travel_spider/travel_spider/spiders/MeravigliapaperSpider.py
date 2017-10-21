@@ -31,7 +31,7 @@ class MeravigliapaperSpider(CrawlSpider):
     def parse_details(self, response):
         self.load_pids()
         urls = response.xpath("//div[@id='wpex-grid-wrap']/article/a/@href").extract()
-        print(urls)
+        len(urls)
         for url in urls:
             if url not in self.urls:
                 self.urls.add(url)
