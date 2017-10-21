@@ -69,7 +69,7 @@ class MeravigliapaperSpider(CrawlSpider):
             item['date'] = response.xpath('//div[@id="post"]/div/header/section/div/text()').extract()[0];
             item['category'] = response.xpath('//div[@id="post"]/div/header/section/ul/li/a/text()').extract()[0];
             item['address'] = response.url
-            item['name'] = re.search(r'meravigliapaper.com/en/.+?/(.*?)/',response.url).group(1)
+            item['name'] = re.search(r'meravigliapaper.com/.+?/.+?/(.*?)/',response.url).group(1)
             item['content'] = content
 
         except Exception as e:
