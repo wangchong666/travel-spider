@@ -17,4 +17,5 @@ class TravelSpiderItem(scrapy.Item):
     category = scrapy.Field()
     address = scrapy.Field()
     content = scrapy.Field()
+    site = scrapy.Field()
     pass
