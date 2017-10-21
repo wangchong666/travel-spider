@@ -59,20 +59,18 @@ class MeravigliapaperSpider(CrawlSpider):
 
         content = response.xpath('//div[@id="post"]/div/article').extract()[0];
         try:
-            # settings = get_project_settings()
-            # blacklist = settings.get('BLACK_LIST');
-            # replacelist = settings.get('REPLACE_LIST');
-            item['title'] = response.xpath('//div[@id="post"]/div/header/h1/text()').extract()[0];
-            item['location'] = response.xpath('//div[@id="post"]/div/header/h2/text()').extract()[0];
+
             item['date'] = response.xpath('//div[@id="post"]/div/header/section/div/text()').extract()[0];
             item['category'] = response.xpath('//div[@id="post"]/div/header/section/ul/li/a/text()').extract()[0];
             item['address'] = response.url
             item['name'] = re.search(r'meravigliapaper.com(/en)?/.+?/(.*?)/',response.url).group(2)
             item['content'] = content
             item['site'] = "meravigliapaper"
+            item['title'] = response.xpath('//div[@id="post"]/div/header/h1/text()').extract()[0];
+            item['location'] = response.xpath('//div[@id="post"]/div/header/h2/text()').extract()[0];
 
         except Exception as e:
             self.logger.error(response.url)
-            raise e
+            #raise e
         return item
 
