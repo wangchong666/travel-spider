@@ -40,7 +40,8 @@ class MeravigliapaperSpider(CrawlSpider):
         pop = response.xpath("//div[@class='page-of-page']/span/text()").extract()[0]
         f = 'http://meravigliapaper.com/en/page/{0}/'
         pages = int(pop.split(" ")[2]);
-        return [scrapy.FormRequest(url=f.format(i),callback=self.parse_details) for i in range(1,pages+1)]
+        urls = [scrapy.FormRequest(url=f.format(i),callback=self.parse_details) for i in range(1,pages+1)]
+        print(urls)
         pass
     # def parse(self, response):
     #     print(response.url);
